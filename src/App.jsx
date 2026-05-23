@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import {
   PawPrint,
@@ -12,11 +12,12 @@ import {
   Dog,
   Cat,
 } from "lucide-react";
+import historyGallery from "./historyGallery";
 
 const breeds = [
   { name: "Shih-tzu", desc: "Companheiro, dócil e ideal para famílias.", tag: "Mais procurado", image: "/imagens/Shihtzu.jpg" },
   { name: "Lulu da Pomerânia", desc: "Pequeno, elegante e cheio de personalidade.", tag: "Premium", image: "/imagens/lulu.jpg" },
-  { name: "Yorkshire Terrier", desc: "Carinhoso, ativo e excelente para ambientes internos.", image: "/imagens/york.jpg" },
+  { name: "Yorkshire Terrier", desc: "Carinhoso, ativo e excelente para ambientes internos.", tag: "Sofisticado", image: "/imagens/york.jpg" },
   { name: "Rottweiler", desc: "Forte, leal e indicado para tutores experientes.", tag: "Grande porte", image: "/imagens/rott.jpg" },
   { name: "Pug", desc: "Afetuoso, divertido e muito apegado à família.", tag: "Família", image: "/imagens/pug.jpg" },
   { name: "Pastor Alemão", desc: "Inteligente, protetor e de fácil treinamento.", tag: "Guarda" , image: "/imagens/pas.jpg" },
@@ -38,8 +39,28 @@ const breeds = [
   { name: "Maine Coon", desc: "Grande, dócil e conhecido como gigante gentil.", tag: "Felino grande" , image: "/imagens/mai.jpg" },
   { name: "Gato Angorá", desc: "Elegante, sociável e de pelagem delicada.", tag: "Felino elegante" , image: "/imagens/ang.jpg" },
 ];
+const availableGallery = [
+  {
+    title: "Salsichinha Macho",
+    desc: "Disponível para consulta",
+    type: "video",
+    src: "/galeria/disponiveis/salsicha.mp4",
+  },
+  {
+    title: "Pinscher Zero Macho",
+    desc: "Vídeo atualizado do filhote",
+    type: "video",
+    src: "/galeria/disponiveis/pinscher.mp4",
+  },
+  {
+    title: "Golden Retriever Macho",
+    desc: "Consulte disponibilidade pelo WhatsApp",
+    type: "image",
+    src: "/galeria/disponiveis/GOLDEN (1).jpg",  
+  },
+];
 
-const whatsappNumber = "5599984319021";
+const whatsappNumber = "5599984319021"; 
 
 function Button({ children, variant = "dark", href }) {
   const className =
@@ -47,7 +68,7 @@ function Button({ children, variant = "dark", href }) {
       ? "btn btn-light"
       : variant === "outline"
       ? "btn btn-outline"
-      : "btn btn-dark";
+      : "btn btn-dark"; 
 
   if (href) {
     return (
@@ -59,9 +80,333 @@ function Button({ children, variant = "dark", href }) {
 
   return <button className={className}>{children}</button>;
 }
+function GallerySection({ id, eyebrow, title, subtitle, items, dark = false }) {
+  return (
+    <section id={id} className={dark ? "section dark" : "section white"}>
+      <div className="container">
+        <div className="section-header">
+          <div>
+            <p className="eyebrow">{eyebrow}</p>
+            <h2 className="section-title">{title}</h2>
+          </div>
+          <p>{subtitle}</p>
+        </div>
+
+        <div className="gallery-grid">
+          {items.map((item) => (
+            <div className="gallery-card" key={item.src}>
+              <div className="gallery-media">
+                {item.type === "video" ? (
+                  <video
+                    src={item.src}
+                    controls
+                    muted
+                    playsInline
+                    preload="metadata"
+                  />
+                ) : (
+                  <img src={item.src} alt={item.title} />
+                )}
+              </div>
+
+              <div className="gallery-content">
+                <h3>{item.title}</h3>
+                <p>{item.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+function HistoryTeaser({ items }) {
+  const previewItems = items.slice(0, 6);
+
+  return (
+    <section id="historico" className="section white">
+      <div className="container">
+        <div className="history-teaser">
+          <div className="history-teaser-text">
+            <p className="eyebrow">Nosso histórico</p>
+            <h2 className="section-title">Mais de 700 registros de filhotes</h2>
+            <p>
+              Conheça parte da nossa trajetória com fotos e vídeos de filhotes
+              que já passaram por aqui. A galeria completa reúne registros reais
+              de atendimentos, entregas e filhotes já vendidos.
+            </p>
+
+            <a
+              href="/#historico-completo"
+              target="_blank"
+              rel="noreferrer"
+              className="btn btn-dark"
+            >
+              Ver galeria completa
+            </a>
+          </div>
+
+          <div className="history-preview-grid">
+            {previewItems.map((item) => (
+              <div className="history-preview-card" key={item.src}>
+                {item.type === "video" ? (
+                  <video src={item.src} muted playsInline preload="metadata" />
+                ) : (
+                  <img src={item.src} alt="Registro do histórico do canil" />
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function FullHistoryPage({ items }) {
+  const [visibleCount, setVisibleCount] = useState(36);
+  const visibleItems = items.slice(0, visibleCount);
+  const hasMore = visibleCount < items.length;
+
+  return (
+    <div className="full-gallery-page">
+      <style>{`
+        * {
+          box-sizing: border-box;
+        }
+
+        body {
+          margin: 0;
+          font-family: Inter, Arial, Helvetica, sans-serif;
+          background: #fbf7ef;
+          color: #1c1917;
+        }
+
+        a {
+          color: inherit;
+          text-decoration: none;
+        }
+
+        .container {
+          width: min(1180px, calc(100% - 40px));
+          margin: 0 auto;
+        }
+
+        .btn {
+          border: 0;
+          cursor: pointer;
+          min-height: 46px;
+          padding: 0 22px;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+          border-radius: 999px;
+          font-weight: 700;
+          font-size: 15px;
+          transition: 0.2s ease;
+          white-space: nowrap;
+        }
+
+        .btn-dark {
+          background: #1c1917;
+          color: #fff;
+          box-shadow: 0 10px 24px rgba(28, 25, 23, 0.16);
+        }
+
+        .btn-dark:hover {
+          background: #292524;
+          transform: translateY(-1px);
+        }
+
+        .btn-outline {
+          background: rgba(255, 255, 255, 0.08);
+          color: #fff;
+          border: 1px solid rgba(255, 255, 255, 0.28);
+        }
+
+        .full-gallery-page {
+          min-height: 100vh;
+          background: #fbf7ef;
+        }
+
+        .full-gallery-header {
+          background: #1c1917;
+          color: #fff;
+          padding: 58px 0;
+        }
+
+        .full-gallery-header-inner {
+          display: flex;
+          justify-content: space-between;
+          gap: 28px;
+          align-items: center;
+        }
+
+        .eyebrow {
+          margin: 0 0 14px;
+          color: #fcd34d;
+          font-size: 13px;
+          font-weight: 800;
+          text-transform: uppercase;
+          letter-spacing: 0.22em;
+        }
+
+        .full-gallery-header h1 {
+          margin: 0;
+          font-size: clamp(36px, 5vw, 62px);
+          line-height: 1;
+          letter-spacing: -0.06em;
+        }
+
+        .full-gallery-header p:not(.eyebrow) {
+          max-width: 720px;
+          color: #d6d3d1;
+          line-height: 1.7;
+          font-size: 17px;
+        }
+
+        .full-gallery-section {
+          padding: 48px 0 70px;
+        }
+
+        .full-gallery-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 16px;
+        }
+
+        .full-gallery-card {
+          aspect-ratio: 1 / 1;
+          overflow: hidden;
+          border-radius: 24px;
+          background: #e7e5e4;
+          box-shadow: 0 10px 28px rgba(28, 25, 23, 0.08);
+        }
+
+        .full-gallery-card img,
+        .full-gallery-card video {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
+        }
+
+        .load-more-wrap {
+          display: flex;
+          justify-content: center;
+          margin-top: 36px;
+        }
+
+        @media (max-width: 980px) {
+          .full-gallery-header-inner {
+            align-items: flex-start;
+            flex-direction: column;
+          }
+
+          .full-gallery-grid {
+            grid-template-columns: repeat(3, 1fr);
+          }
+        }
+
+        @media (max-width: 640px) {
+          .container {
+            width: min(100% - 28px, 1180px);
+          }
+
+          .full-gallery-header {
+            padding: 42px 0;
+          }
+
+          .full-gallery-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+          }
+
+          .full-gallery-card {
+            border-radius: 16px;
+          }
+        }
+      `}</style>
+
+      <header className="full-gallery-header">
+        <div className="container full-gallery-header-inner">
+          <div>
+            <p className="eyebrow">Galeria completa</p>
+            <h1>Histórico do Canil Multi Raças</h1>
+            <p>
+              Fotos e vídeos de filhotes que já passaram por aqui. Os registros
+              mostram nossa trajetória, cuidado e atendimento às famílias.
+            </p>
+          </div>
+
+          <a href="/" className="btn btn-outline">
+            Voltar ao site
+          </a>
+        </div>
+      </header>
+
+      <main className="full-gallery-section">
+        <div className="container">
+          <div className="full-gallery-grid">
+            {visibleItems.map((item) => (
+              <div className="full-gallery-card" key={item.src}>
+                {item.type === "video" ? (
+                  <video
+                    src={item.src}
+                    controls
+                    muted
+                    playsInline
+                    preload="none"
+                  />
+                ) : (
+                  <img
+                    src={item.src}
+                    alt="Registro do histórico do canil"
+                    loading="lazy"
+                  />
+                )}
+              </div>
+            ))}
+          </div>
+
+          {hasMore ? (
+            <div className="load-more-wrap">
+              <button
+                className="btn btn-dark"
+                onClick={() => setVisibleCount((count) => count + 36)}
+              >
+                Carregar mais registros
+              </button>
+            </div>
+          ) : null}
+        </div>
+      </main>
+    </div>
+  );
+}
 
 function App() {
   const whatsappLink = `https://wa.me/${whatsappNumber}?text=Olá! Tenho interesse em saber mais sobre os filhotes disponíveis.`;
+  const [currentHash, setCurrentHash] = useState(window.location.hash);
+
+  console.log("Total de itens do histórico:", historyGallery.length);
+
+useEffect(() => {
+  const handleHashChange = () => {
+    setCurrentHash(window.location.hash);
+  };
+
+  window.addEventListener("hashchange", handleHashChange);
+
+  return () => {
+    window.removeEventListener("hashchange", handleHashChange);
+  };
+}, []);
+
+if (currentHash === "#historico-completo") {
+  return <FullHistoryPage items={historyGallery} />;
+}
 
   return (
     <div className="site">
@@ -658,12 +1003,121 @@ function App() {
           gap: 18px;
           flex-wrap: wrap;
         }
+          .history-teaser {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 42px;
+  align-items: center;
+  padding: 34px;
+  border-radius: 36px;
+  background: #fbf7ef;
+}
+
+.history-teaser-text p:not(.eyebrow) {
+  color: #57534e;
+  font-size: 18px;
+  line-height: 1.75;
+  margin: 20px 0 28px;
+}
+
+.history-preview-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.history-preview-card {
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: 24px;
+  background: #e7e5e4;
+  box-shadow: 0 12px 28px rgba(28, 25, 23, 0.1);
+}
+
+.history-preview-card img,
+.history-preview-card video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.full-gallery-page {
+  min-height: 100vh;
+  background: #fbf7ef;
+}
+
+.full-gallery-header {
+  background: #1c1917;
+  color: #fff;
+  padding: 58px 0;
+}
+
+.full-gallery-header-inner {
+  display: flex;
+  justify-content: space-between;
+  gap: 28px;
+  align-items: center;
+}
+
+.full-gallery-header h1 {
+  margin: 0;
+  font-size: clamp(36px, 5vw, 62px);
+  line-height: 1;
+  letter-spacing: -0.06em;
+}
+
+.full-gallery-header p:not(.eyebrow) {
+  max-width: 720px;
+  color: #d6d3d1;
+  line-height: 1.7;
+  font-size: 17px;
+}
+
+.full-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.full-gallery-card {
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: 24px;
+  background: #e7e5e4;
+  box-shadow: 0 10px 28px rgba(28, 25, 23, 0.08);
+}
+
+.full-gallery-card img,
+.full-gallery-card video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.load-more-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 36px;
+}
 
         @media (max-width: 980px) {
           .nav {
             display: none;
           }
+.history-teaser {
+  grid-template-columns: 1fr;
+}
 
+.full-gallery-header-inner {
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.full-gallery-grid {
+  grid-template-columns: repeat(3, 1fr);
+}
           .hero-grid,
           .section-grid,
           .contact-grid {
@@ -673,7 +1127,9 @@ function App() {
           .breed-grid {
             grid-template-columns: repeat(2, 1fr);
           }
-
+.gallery-grid {
+  grid-template-columns: repeat(2, 1fr);
+}
           .process-grid,
           .benefits-grid {
             grid-template-columns: repeat(2, 1fr);
@@ -685,12 +1141,79 @@ function App() {
             max-width: none;
           }
         }
+          .gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.gallery-card {
+  overflow: hidden;
+  border-radius: 30px;
+  background: #fff;
+  box-shadow: 0 10px 28px rgba(28, 25, 23, 0.08);
+  transition: 0.22s ease;
+}
+
+.gallery-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 22px 48px rgba(28, 25, 23, 0.14);
+}
+
+.gallery-media {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #f5f5f4;
+}
+
+.gallery-media img,
+.gallery-media video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.gallery-content {
+  padding: 22px;
+}
+
+.gallery-content h3 {
+  margin: 0 0 8px;
+  font-size: 22px;
+  letter-spacing: -0.04em;
+}
+
+.gallery-content p {
+  margin: 0;
+  color: #57534e;
+  line-height: 1.6;
+}
+
+.dark .gallery-card {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dark .gallery-content p {
+  color: #d6d3d1;
+}
 
         @media (max-width: 640px) {
           .container {
             width: min(100% - 28px, 1180px);
           }
+.history-preview-grid {
+  grid-template-columns: repeat(2, 1fr);
+}
 
+.full-gallery-grid {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.history-teaser {
+  padding: 22px;
+}
           .header-inner {
             align-items: flex-start;
           }
@@ -733,12 +1256,13 @@ function App() {
             flex-direction: column;
           }
 
-          .breed-grid,
-          .process-grid,
-          .benefits-grid,
-          .form-grid {
-            grid-template-columns: 1fr;
-          }
+       .breed-grid,
+.gallery-grid,
+.process-grid,
+.benefits-grid,
+.form-grid {
+  grid-template-columns: 1fr;
+}
 
           textarea {
             grid-column: span 1;
@@ -763,12 +1287,14 @@ function App() {
             </div>
           </a>
 
-          <nav className="nav">
-            <a href="#filhotes">Filhotes</a>
-            <a href="#sobre">Sobre</a>
-            <a href="#processo">Como funciona</a>
-            <a href="#contato">Contato</a>
-          </nav>
+        <nav className="nav">
+  <a href="#filhotes">Filhotes</a>
+  <a href="#disponiveis">Disponíveis</a>
+  <a href="#historico">Histórico</a>
+  <a href="#sobre">Sobre</a>
+  <a href="#processo">Como funciona</a>
+  <a href="#contato">Contato</a>
+</nav>
 
           <Button href={whatsappLink}>
             <MessageCircle size={18} />
@@ -809,7 +1335,7 @@ function App() {
 
               <div className="stats">
                 <div className="stat">
-                  <strong>5+</strong>
+                  <strong>7+</strong>
                   anos de atuação
                 </div>
                 <div className="stat">
@@ -936,6 +1462,7 @@ function App() {
             </div>
           </div>
         </section>
+<HistoryTeaser items={historyGallery} />
 
         <section id="processo" className="section dark">
           <div className="container">
