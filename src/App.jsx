@@ -884,6 +884,13 @@ function App() {
                 rotina da família, espaço disponível, preferência de porte e
                 necessidades do futuro tutor.
               </p>
+
+              <p>
+                 Há quase 10 anos no mercado, já disponibilizamos inumeros filhotes
+                 para centenas de familias, não perca essa oportunidade, conte conosco
+                 para lhe ajudar a levar um novo membro para sua familia!
+              </p>
+              
             </div>
           </div>
         </section>
