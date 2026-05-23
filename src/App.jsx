@@ -352,13 +352,13 @@ function FullHistoryPage({ items }) {
             {visibleItems.map((item) => (
               <div className="full-gallery-card" key={item.src}>
                 {item.type === "video" ? (
-                  <video
-                    src={item.src}
-                    controls
-                    muted
-                    playsInline
-                    preload="none"
-                  />
+  <video
+  src={item.src}
+  controls
+  muted
+  playsInline
+  preload="metadata"
+/>
                 ) : (
                   <img
                     src={item.src}
