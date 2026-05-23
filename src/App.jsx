@@ -14,30 +14,29 @@ import {
 } from "lucide-react";
 
 const breeds = [
-  { name: "Shih-tzu", desc: "Companheiro, dócil e ideal para famílias.", tag: "Mais procurado" },
-  { name: "Lulu da Pomerânia", desc: "Pequeno, elegante e cheio de personalidade.", tag: "Premium" },
-  { name: "Yorkshire Terrier", desc: "Carinhoso, ativo e excelente para ambientes internos.", tag: "Mini" },
-  { name: "Rottweiler", desc: "Forte, leal e indicado para tutores experientes.", tag: "Grande porte" },
-  { name: "Pug", desc: "Afetuoso, divertido e muito apegado à família.", tag: "Família" },
-  { name: "Pastor Alemão", desc: "Inteligente, protetor e de fácil treinamento.", tag: "Guarda" },
-  { name: "Pinscher", desc: "Pequeno, alerta e muito ligado ao tutor.", tag: "Compacto" },
-  { name: "Spitz Alemão", desc: "Elegante, expressivo e com pelagem marcante.", tag: "Pelagem premium" },
-  { name: "Bulldog Francês", desc: "Calmo, sociável e excelente para apartamentos.", tag: "Apartamento" },
-  { name: "Golden Retriever", desc: "Amável, inteligente e muito indicado para famílias.", tag: "Família" },
-  { name: "Labrador Retriever", desc: "Brincalhão, leal e de ótima convivência com crianças.", tag: "Companheiro" },
-  { name: "Poodle", desc: "Inteligente, versátil e disponível em diferentes portes.", tag: "Versátil" },
-  { name: "Maltês", desc: "Delicado, carinhoso e ideal para companhia.", tag: "Pequeno porte" },
-  { name: "Chihuahua", desc: "Pequeno no tamanho, grande na personalidade.", tag: "Mini" },
-  { name: "Dachshund", desc: "Curioso, fiel e conhecido pelo corpo alongado.", tag: "Salsichinha" },
-  { name: "Border Collie", desc: "Muito inteligente, ativo e indicado para tutores dinâmicos.", tag: "Alta energia" },
-  { name: "Beagle", desc: "Alegre, sociável e cheio de energia.", tag: "Ativo" },
-  { name: "Husky Siberiano", desc: "Imponente, resistente e de aparência marcante.", tag: "Exótico" },
-  { name: "Chow Chow", desc: "Reservado, elegante e com pelagem volumosa.", tag: "Imponente" },
-  { name: "Akita", desc: "Leal, protetor e de presença marcante.", tag: "Nobre" },
-  { name: "Gato Persa", desc: "Tranquilo, elegante e de pelagem longa.", tag: "Felino premium" },
-  { name: "Gato Siamês", desc: "Comunicativo, afetuoso e muito expressivo.", tag: "Felino" },
-  { name: "Maine Coon", desc: "Grande, dócil e conhecido como gigante gentil.", tag: "Felino grande" },
-  { name: "Gato Angorá", desc: "Elegante, sociável e de pelagem delicada.", tag: "Felino elegante" },
+  { name: "Shih-tzu", desc: "Companheiro, dócil e ideal para famílias.", tag: "Mais procurado", image: "/imagens/Shihtzu.jpg" },
+  { name: "Lulu da Pomerânia", desc: "Pequeno, elegante e cheio de personalidade.", tag: "Premium", image: "/imagens/lulu.jpg" },
+  { name: "Yorkshire Terrier", desc: "Carinhoso, ativo e excelente para ambientes internos.", image: "/imagens/york.jpg" },
+  { name: "Rottweiler", desc: "Forte, leal e indicado para tutores experientes.", tag: "Grande porte", image: "/imagens/rott.jpg" },
+  { name: "Pug", desc: "Afetuoso, divertido e muito apegado à família.", tag: "Família", image: "/imagens/pug.jpg" },
+  { name: "Pastor Alemão", desc: "Inteligente, protetor e de fácil treinamento.", tag: "Guarda" , image: "/imagens/pas.jpg" },
+  { name: "Pinscher", desc: "Pequeno, alerta e muito ligado ao tutor.", tag: "Compacto", image: "/imagens/pinscher.jpg" },
+  { name: "Spitz Alemão", desc: "Elegante, expressivo e com pelagem marcante.", tag: "Pelagem premium" , image: "/imagens/spitz.jpg" },
+  { name: "Bulldog Francês", desc: "Calmo, sociável e excelente para apartamentos.", tag: "Apartamento" , image: "/imagens/bul.jpg" },
+  { name: "Golden Retriever", desc: "Amável, inteligente e muito indicado para famílias.", tag: "Família" , image: "/imagens/gol.jpg" },
+  { name: "Labrador Retriever", desc: "Brincalhão, leal e de ótima convivência com crianças.", tag: "Companheiro" , image: "/imagens/lab.jpg" },
+  { name: "Poodle", desc: "Inteligente, versátil e disponível em diferentes portes.", tag: "Versátil" , image: "/imagens/poo.jpg" },
+  { name: "Maltês", desc: "Delicado, carinhoso e ideal para companhia.", tag: "Pequeno porte" , image: "/imagens/mal.jpg" },
+  { name: "Chihuahua", desc: "Pequeno no tamanho, grande na personalidade.", tag: "Mini" , image: "/imagens/chi.jpg" },
+  { name: "Dachshund", desc: "Curioso, fiel e conhecido pelo corpo alongado.", tag: "Salsichinha" , image: "/imagens/sals.jpg" },
+  { name: "Border Collie", desc: "Muito inteligente, ativo e indicado para tutores dinâmicos.", tag: "Alta energia" , image: "/imagens/bor.jpg" },
+  { name: "Beagle", desc: "Alegre, sociável e cheio de energia.", tag: "Ativo" , image: "/imagens/beal.jpg" },
+  { name: "Husky Siberiano", desc: "Imponente, resistente e de aparência marcante.", tag: "Exótico" , image: "/imagens/hus.jpg" },
+  { name: "Chow Chow", desc: "Reservado, elegante e com pelagem volumosa.", tag: "Imponente" , image: "/imagens/cho.jpg" },
+  { name: "Akita", desc: "Leal, protetor e de presença marcante.", tag: "Nobre" , image: "/imagens/aki.jpg" },
+  { name: "Gato Persa", desc: "Tranquilo, elegante e de pelagem longa.", tag: "Felino premium" , image: "/imagens/per.jpg" },
+  { name: "Maine Coon", desc: "Grande, dócil e conhecido como gigante gentil.", tag: "Felino grande" , image: "/imagens/mai.jpg" },
+  { name: "Gato Angorá", desc: "Elegante, sociável e de pelagem delicada.", tag: "Felino elegante" , image: "/imagens/ang.jpg" },
 ];
 
 const whatsappNumber = "5599984319021";
@@ -329,20 +328,24 @@ function App() {
           background: rgba(255, 255, 255, 0.48);
           box-shadow: inset 0 0 40px rgba(255, 255, 255, 0.5);
         }
+          .hero-image-photo-box {
+  padding: 0;
+  overflow: hidden;
+}
 
-        .animal-icon {
-          width: 112px;
-          height: 112px;
-          margin: 0 auto 26px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          gap: 4px;
-          border-radius: 999px;
-          background: #1c1917;
-          color: #fff;
-          box-shadow: 0 20px 44px rgba(28, 25, 23, 0.24);
-        }
+.hero-photo {
+  width: 100%;
+  height: 100%;
+  min-height: 450px;
+  object-fit: cover;
+  border-radius: 28px;
+  display: block;
+}
+        <img
+  src="/imagens/capa.jpg"
+  alt="Filhotes do Canil Multi Raças"
+  className="hero-photo"
+/>
 
         .hero-card-title {
           margin: 0;
@@ -483,15 +486,13 @@ function App() {
           background: linear-gradient(135deg, #f5f5f4, #fef3c7);
         }
 
-        .breed-image-inner {
-          height: 100%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          border-radius: 26px;
-          border: 1px solid rgba(255, 255, 255, 0.75);
-          background: rgba(255, 255, 255, 0.45);
-        }
+        .breed-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 26px;
+  display: block;
+}
 
         .breed-content {
           padding: 24px;
@@ -836,13 +837,13 @@ function App() {
                         <Dog size={42} />
                         <Cat size={36} />
                       </div>
-                      <h2 className="hero-card-title">
-                        Cuidado desde a escolha até a chegada.
-                      </h2>
-                      <p className="hero-card-text">
-                        Substitua este bloco por uma foto profissional de filhotes
-                        em estúdio ou em ambiente natural.
-                      </p>
+                     <div className="hero-image-inner hero-image-photo-box">
+  <img
+    src="/imagens/capa.jpg"
+    alt="Filhote do Canil Multi Raças"
+    className="hero-photo"
+  />
+</div>
                     </div>
                   </div>
                 </div>
@@ -905,7 +906,13 @@ function App() {
                 <div className="breed-card" key={breed.name}>
                   <div className="breed-image">
                     <div className="breed-image-inner">
-                      <PawPrint size={64} />
+                    <div className="breed-image-inner">
+  {breed.image ? (
+    <img src={breed.image} alt={breed.name} className="breed-photo" />
+  ) : (
+    <PawPrint size={64} />
+  )}
+</div>
                     </div>
                   </div>
 
