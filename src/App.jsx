@@ -1472,10 +1472,8 @@ if (currentHash === "#historico-completo") {
             </div>
           </div>
         </section>
-        <GallerySection
-
-
- HistoryTeaser items={historyGallery} />
+    
+<HistoryTeaser items={historyGallery} />
 
         <section id="processo" className="section dark">
           <div className="container">
