@@ -1388,6 +1388,16 @@ if (currentHash === "#historico-completo") {
           </div>
         </section>
 
+<GallerySection
+         id="disponiveis"
+  eyebrow="Disponíveis do dia"
+  title="Filhotes disponíveis agora"
+  subtitle="Confira fotos e vídeos atualizados dos filhotes disponíveis para consulta. A disponibilidade pode mudar ao longo do dia."
+  items={availableGallery}
+  />
+
+
+
         <section id="sobre" className="section white">
           <div className="container section-grid">
             <div>
@@ -1463,14 +1473,9 @@ if (currentHash === "#historico-completo") {
           </div>
         </section>
         <GallerySection
-  id="disponiveis"
-  eyebrow="Disponíveis do dia"
-  title="Filhotes disponíveis agora"
-  subtitle="Confira fotos e vídeos atualizados dos filhotes disponíveis para consulta. A disponibilidade pode mudar ao longo do dia."
-  items={availableGallery}
-/>
 
-<HistoryTeaser items={historyGallery} />
+
+ HistoryTeaser items={historyGallery} />
 
         <section id="processo" className="section dark">
           <div className="container">
