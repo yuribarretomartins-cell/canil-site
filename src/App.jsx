@@ -80,7 +80,7 @@ function Button({ children, variant = "dark", href }) {
 
   return <button className={className}>{children}</button>;
 }
-function GallerySection({ id, eyebrow, title, subtitle, items, dark = false }) {
+function GallerySection({ id, eyebrow, title, subtitle, items, dark = false, variant = "default" }) {
   return (
     <section id={id} className={dark ? "section dark" : "section white"}>
       <div className="container">
@@ -92,10 +92,10 @@ function GallerySection({ id, eyebrow, title, subtitle, items, dark = false }) {
           <p>{subtitle}</p>
         </div>
 
-        <div className="gallery-grid">
+        <div className={variant === "stories" ? "gallery-grid stories-grid" : "gallery-grid"}>
           {items.map((item) => (
-            <div className="gallery-card" key={item.src}>
-              <div className="gallery-media">
+          <div className={variant === "stories" ? "gallery-card stories-card" : "gallery-card"} key={item.src}>
+              <div className={variant === "stories" ? "gallery-media stories-media" : "gallery-media"}>
                 {item.type === "video" ? (
                   <video
                     src={item.src}
@@ -218,7 +218,26 @@ function FullHistoryPage({ items }) {
           background: #292524;
           transform: translateY(-1px);
         }
+.pulse-button {
+  animation: softPulseFloat 2.4s ease-in-out infinite;
+}
 
+@keyframes softPulseFloat {
+  0% {
+    transform: translateY(0) scale(1);
+    box-shadow: 0 10px 24px rgba(28, 25, 23, 0.16);
+  }
+
+  50% {
+    transform: translateY(-4px) scale(1.025);
+    box-shadow: 0 18px 34px rgba(28, 25, 23, 0.26);
+  }
+
+  100% {
+    transform: translateY(0) scale(1);
+    box-shadow: 0 10px 24px rgba(28, 25, 23, 0.16);
+  }
+}
         .btn-outline {
           background: rgba(255, 255, 255, 0.08);
           color: #fff;
@@ -1106,6 +1125,9 @@ if (currentHash === "#historico-completo") {
           .nav {
             display: none;
           }
+.stories-grid {
+  grid-template-columns: repeat(3, 1fr);
+}
 .history-teaser {
   grid-template-columns: 1fr;
 }
@@ -1173,6 +1195,34 @@ if (currentHash === "#historico-completo") {
   object-fit: cover;
   display: block;
 }
+  .stories-grid {
+  grid-template-columns: repeat(4, 1fr);
+  align-items: start;
+}
+
+.stories-card {
+  border-radius: 32px;
+  background: #111;
+  overflow: hidden;
+}
+
+.stories-media {
+  aspect-ratio: 9 / 16;
+  background: #111;
+}
+
+.stories-media img,
+.stories-media video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #111;
+  display: block;
+}
+
+.stories-card .gallery-content {
+  background: #fff;
+}
 
 .gallery-content {
   padding: 22px;
@@ -1203,6 +1253,15 @@ if (currentHash === "#historico-completo") {
           .container {
             width: min(100% - 28px, 1180px);
           }
+            .stories-grid {
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.stories-card {
+  border-radius: 24px;
+}
+ 
 .history-preview-grid {
   grid-template-columns: repeat(2, 1fr);
 }
@@ -1327,7 +1386,9 @@ if (currentHash === "#historico-completo") {
               </p>
 
               <div className="hero-actions">
-                <Button href="#filhotes">Ver filhotes disponíveis</Button>
+              <a href="#disponiveis" className="btn btn-dark pulse-button">
+  Ver filhotes disponíveis
+</a>
                 <Button variant="outline" href={whatsappLink}>
                   Falar com especialista
                 </Button>
@@ -1389,12 +1450,13 @@ if (currentHash === "#historico-completo") {
         </section>
 
 <GallerySection
-         id="disponiveis"
+  id="disponiveis"
   eyebrow="Disponíveis do dia"
   title="Filhotes disponíveis agora"
   subtitle="Confira fotos e vídeos atualizados dos filhotes disponíveis para consulta. A disponibilidade pode mudar ao longo do dia."
   items={availableGallery}
-  />
+  variant="stories"
+/>
 
 
 
