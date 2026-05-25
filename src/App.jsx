@@ -1341,7 +1341,7 @@ if (currentHash === "#historico-completo") {
               <PawPrint size={23} />
             </div>
             <div>
-              <p className="brand-name">Canil Multi Raças</p>
+              <p className="brand-name">Canil Multi Raças Imperatriz</p>
               <p className="brand-place">Imperatriz • MA</p>
             </div>
           </a>
