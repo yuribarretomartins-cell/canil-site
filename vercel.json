@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/admin/:path*",
+      "destination": "https://central-documentos-canil.vercel.app/admin/:path*"
+    }
+  ]
+}
