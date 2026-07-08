@@ -38,6 +38,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Canil Multi Raças Imperatriz | Filhotes em Imperatriz-MA</title>
   </head>
+  <script>
+  (function () {
+    function carregarDisponiveisNaHome() {
+      var secao = document.getElementById("disponiveis");
+
+      if (!secao) return;
+
+      secao.innerHTML = `
+        <section style="padding: 56px 16px; background: #fff;">
+          <div style="max-width: 1180px; margin: 0 auto;">
+            <div style="text-align: center; margin-bottom: 32px;">
+              <p style="font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase; color: #b8894f; font-weight: 700; margin-bottom: 8px;">
+                Disponíveis agora
+              </p>
+              <h2 style="font-size: clamp(28px, 4vw, 42px); line-height: 1.1; margin: 0 0 12px; color: #2b1b12;">
+                Filhotes disponíveis no Canil Multi Raças Imperatriz
+              </h2>
+              <p style="font-size: 16px; color: #6b5b50; max-width: 720px; margin: 0 auto;">
+                Confira os filhotes cadastrados no painel, com fotos, informações, status e atendimento pelo WhatsApp.
+              </p>
+            </div>
+
+            <iframe
+              src="/disponiveis"
+              title="Filhotes disponíveis"
+              style="width: 100%; min-height: 900px; border: 0; border-radius: 20px; overflow: hidden;"
+              loading="lazy"
+            ></iframe>
+          </div>
+        </section>
+      `;
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", carregarDisponiveisNaHome);
+    } else {
+      carregarDisponiveisNaHome();
+    }
+  })();
+</script>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
