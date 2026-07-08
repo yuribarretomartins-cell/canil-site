@@ -1,6 +1,14 @@
 {
   "rewrites": [
     {
+      "source": "/admin",
+      "destination": "https://central-documentos-canil.vercel.app/admin"
+    },
+    {
+      "source": "/admin/",
+      "destination": "https://central-documentos-canil.vercel.app/admin"
+    },
+    {
       "source": "/admin/:path*",
       "destination": "https://central-documentos-canil.vercel.app/admin/:path*"
     },
