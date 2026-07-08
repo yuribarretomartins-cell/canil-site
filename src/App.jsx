@@ -12,6 +12,7 @@ import {
   Dog,
   Cat,
 } from "lucide-react";
+import { Analytics } from "@vercel/analytics/react";
 import historyGallery from "./historyGallery";
 
 const breeds = [
@@ -1656,6 +1657,7 @@ if (currentHash === "#historico-completo") {
           <span>Criação responsável • Atendimento humanizado • Imperatriz - MA</span>
         </div>
       </footer>
+      <Analytics />
     </div>
   );
 }

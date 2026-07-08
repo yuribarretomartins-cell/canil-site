@@ -3,13 +3,14 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-"scripts": {
-  "galeria": "node scripts/gerar-galeria.cjs",
-  "dev": "vite",
-  "build": "vite build",
-  "preview": "vite preview"
-},
+  "scripts": {
+    "galeria": "node scripts/gerar-galeria.cjs",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
   "dependencies": {
+    "@vercel/analytics": "^2.0.1",
     "framer-motion": "^12.40.0",
     "lucide-react": "^1.16.0",
     "react": "^19.2.6",
