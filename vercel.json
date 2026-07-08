@@ -13,6 +13,14 @@
       "destination": "https://central-documentos-canil.vercel.app/admin/:path*"
     },
     {
+      "source": "/disponiveis",
+      "destination": "https://central-documentos-canil.vercel.app/disponiveis"
+    },
+    {
+      "source": "/disponiveis/:path*",
+      "destination": "https://central-documentos-canil.vercel.app/disponiveis/:path*"
+    },
+    {
       "source": "/_next/:path*",
       "destination": "https://central-documentos-canil.vercel.app/_next/:path*"
     }
