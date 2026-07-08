@@ -12,5 +12,211 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+    <script>
+  (function () {
+    const SUPABASE_URL = "https://hsjasxivtwyeysvlgtis.supabase.co";
+    const SUPABASE_KEY = "sb_publishable_Y3oIozMUsa1PZ6dLmDvIuA_A8M21Sd8";
+
+    function formatarData(data) {
+      if (!data) return "";
+      const partes = data.split("-");
+      if (partes.length !== 3) return data;
+      return partes[2] + "/" + partes[1] + "/" + partes[0];
+    }
+
+    function formatarValor(valor) {
+      if (!valor) return "Consulte o valor";
+      return Number(valor).toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL"
+      });
+    }
+
+    function textoWhatsApp(filhote) {
+      const titulo = `${filhote.raca || "Filhote"} ${filhote.sexo || ""} ${filhote.cor || ""}`.trim();
+      return encodeURIComponent(
+        `Olá! Tenho interesse no ${titulo} que vi no site do Canil Multi Raças Imperatriz.`
+      );
+    }
+
+    function encontrarSecaoDisponiveis() {
+      const elementos = Array.from(document.querySelectorAll("section, div"));
+
+      return elementos.find(function (el) {
+        const texto = (el.innerText || "").toLowerCase();
+        return texto.includes("disponíveis agora") || texto.includes("disponiveis agora");
+      });
+    }
+
+    function encontrarGrid(secao) {
+      if (!secao) return null;
+
+      const candidatos = Array.from(secao.querySelectorAll("div"));
+
+      let melhor = null;
+      let melhorPontuacao = 0;
+
+      candidatos.forEach(function (div) {
+        const imagens = div.querySelectorAll("img").length;
+        const filhos = div.children.length;
+        const texto = (div.innerText || "").length;
+
+        const pontuacao = imagens * 5 + filhos + Math.min(texto / 100, 10);
+
+        if (imagens >= 1 && filhos >= 1 && pontuacao > melhorPontuacao) {
+          melhor = div;
+          melhorPontuacao = pontuacao;
+        }
+      });
+
+      return melhor;
+    }
+
+    function encontrarCardModelo(grid) {
+      if (!grid) return null;
+
+      const filhos = Array.from(grid.children);
+
+      return filhos.find(function (el) {
+        return el.querySelector("img");
+      }) || filhos[0];
+    }
+
+    function preencherCard(card, filhote) {
+      card.setAttribute("data-filhote-dinamico", "true");
+
+      const midias = filhote.filhote_midias || [];
+      const capa =
+        midias.find(function (m) { return m.capa; }) ||
+        midias[0];
+
+      const titulo = `${filhote.raca || "Filhote"} ${filhote.sexo || ""}${filhote.cor ? " - " + filhote.cor : ""}`.trim();
+
+      const img = card.querySelector("img");
+      if (img && capa && capa.public_url) {
+        img.src = capa.public_url;
+        img.alt = titulo;
+        img.removeAttribute("srcset");
+        img.removeAttribute("sizes");
+        img.style.objectFit = "cover";
+      }
+
+      const tituloEl = card.querySelector("h1, h2, h3, h4, strong");
+      if (tituloEl) {
+        tituloEl.textContent = titulo;
+      }
+
+      const textos = Array.from(card.querySelectorAll("p, span, li"))
+        .filter(function (el) {
+          return el.offsetParent !== null && (el.innerText || "").trim().length > 0;
+        });
+
+      const detalhes = [
+        filhote.data_nascimento ? `Nascimento: ${formatarData(filhote.data_nascimento)}` : "",
+        `Status: ${filhote.status === "reservado" ? "Reservado" : "Disponível"}`,
+        `Valor: ${formatarValor(filhote.valor)}`,
+        [
+          filhote.vacinado ? "Vacinado" : "",
+          filhote.vermifugado ? "Vermifugado" : "",
+          filhote.pedigree ? "Com pedigree" : ""
+        ].filter(Boolean).join(" • "),
+        filhote.descricao || "Filhote cadastrado pelo Canil Multi Raças Imperatriz."
+      ].filter(Boolean);
+
+      textos.forEach(function (el, index) {
+        if (detalhes[index]) {
+          el.textContent = detalhes[index];
+        }
+      });
+
+      const link = card.querySelector("a");
+
+      if (link) {
+        const hrefOriginal = link.getAttribute("href") || "";
+
+        if (hrefOriginal.includes("wa.me") || hrefOriginal.includes("whatsapp")) {
+          const base = hrefOriginal.split("?")[0];
+          link.setAttribute("href", base + "?text=" + textoWhatsApp(filhote));
+        } else {
+          link.setAttribute("href", "/disponiveis");
+        }
+
+        link.textContent = "Consultar no WhatsApp";
+      }
+
+      return card;
+    }
+
+    async function buscarFilhotes() {
+      const url =
+        `${SUPABASE_URL}/rest/v1/filhotes` +
+        `?select=*,filhote_midias(*)&publicado=eq.true&status=in.(disponivel,reservado)&order=created_at.desc`;
+
+      const resposta = await fetch(url, {
+        headers: {
+          apikey: SUPABASE_KEY,
+          Authorization: "Bearer " + SUPABASE_KEY
+        }
+      });
+
+      if (!resposta.ok) {
+        throw new Error("Erro ao buscar filhotes disponíveis");
+      }
+
+      return resposta.json();
+    }
+
+    async function inserirFilhotesNaHome() {
+      if (document.getElementById("filhotes-dinamicos-home")) return;
+
+      const secao = encontrarSecaoDisponiveis();
+      if (!secao) return;
+
+      const grid = encontrarGrid(secao);
+      if (!grid) return;
+
+      const modelo = encontrarCardModelo(grid);
+      if (!modelo) return;
+
+      const filhotes = await buscarFilhotes();
+
+      if (!filhotes || filhotes.length === 0) return;
+
+      const marcador = document.createElement("div");
+      marcador.id = "filhotes-dinamicos-home";
+      marcador.style.display = "contents";
+
+      filhotes.forEach(function (filhote) {
+        const card = modelo.cloneNode(true);
+        preencherCard(card, filhote);
+        marcador.appendChild(card);
+      });
+
+      grid.appendChild(marcador);
+    }
+
+    function iniciarTentativas() {
+      let tentativas = 0;
+
+      const intervalo = setInterval(function () {
+        tentativas++;
+
+        inserirFilhotesNaHome().catch(function (erro) {
+          console.warn("Não foi possível carregar os filhotes na home:", erro);
+        });
+
+        if (document.getElementById("filhotes-dinamicos-home") || tentativas >= 20) {
+          clearInterval(intervalo);
+        }
+      }, 700);
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", iniciarTentativas);
+    } else {
+      iniciarTentativas();
+    }
+  })();
+</script>
   </body>
 </html>
