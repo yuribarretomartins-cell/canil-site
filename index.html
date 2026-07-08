@@ -1,9 +1,33 @@
 <!doctype html>
 <html lang="en">
   <script>
-  if (window.location.hash === "#disponiveis") {
-    window.location.replace("/disponiveis");
-  }
+  (function () {
+    function irParaDisponiveis() {
+      if (window.location.hash === "#disponiveis") {
+        window.location.replace("/disponiveis");
+      }
+    }
+
+    // Redireciona se a pessoa já abrir o site com #disponiveis
+    irParaDisponiveis();
+
+    // Redireciona quando o hash muda sem recarregar a página
+    window.addEventListener("hashchange", irParaDisponiveis);
+
+    // Intercepta cliques em botões/links que apontam para #disponiveis
+    document.addEventListener(
+      "click",
+      function (event) {
+        var elemento = event.target.closest && event.target.closest("a[href='#disponiveis']");
+
+        if (elemento) {
+          event.preventDefault();
+          window.location.href = "/disponiveis";
+        }
+      },
+      true
+    );
+  })();
 </script>
   <head>
     <meta name="description" content="Canil Multi Raças em Imperatriz-MA. Filhotes de cães e gatos com atendimento humanizado, galeria de disponíveis, histórico de filhotes e atendimento para Maranhão, Pará e Tocantins." />
