@@ -61,7 +61,7 @@ const availableGallery = [
 ];
 
 const whatsappNumber = "5599984319021"; 
-const instagramUrl = "https://www.instagram.com/canilmultiracasimperatriz/";
+const instagramUrl = "https://www.instagram.com/canilmultimperatriz/";
 
 function Button({ children, variant = "dark", href }) {
   const className =
