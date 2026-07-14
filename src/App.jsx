@@ -39,10 +39,30 @@ const breeds = [
   { name: "Maine Coon", desc: "Grande, dócil e conhecido como gigante gentil.", price: "A partir de R$ 4.500,00", tag: "Felino grande", image: "/imagens/mai.jpg" },
   { name: "Gato Angorá", desc: "Elegante, sociável e de pelagem delicada.", price: "A partir de R$ 2.000,00", tag: "Felino elegante", image: "/imagens/ang.jpg" },
 ];
-
+const availableGallery = [
+  {
+    title: "Salsichinha Macho",
+    desc: "Disponível para consulta",
+    type: "video",
+    src: "/galeria/disponiveis/salsicha.mp4",
+  },
+  {
+    title: "Pinscher Zero Macho",
+    desc: "Vídeo atualizado do filhote",
+    type: "video",
+    src: "/galeria/disponiveis/pinscher.mp4",
+  },
+  {
+    title: "Golden Retriever Macho",
+    desc: "Consulte disponibilidade pelo WhatsApp",
+    type: "image",
+    src: "/galeria/disponiveis/GOLDEN (1).jpg",  
+  },
+];
 
 const whatsappNumber = "5599984319021"; 
 const instagramUrl = "https://www.instagram.com/canilmultimperatriz/";
+const instagramStoriesUrl = "https://www.instagram.com/stories/canilmultimperatriz/";
 
 function Button({ children, variant = "dark", href }) {
   const className =
@@ -1412,7 +1432,7 @@ if (currentHash === "#historico-completo") {
 
         <nav className="nav">
   <a href="#filhotes">Filhotes</a>
-  <a href="#disponiveis">Disponíveis</a>
+  <a href={instagramStoriesUrl} target="_blank" rel="noopener noreferrer">Disponíveis</a>
   <a href="#historico">Histórico</a>
   <a href="#sobre">Sobre</a>
   <a href="#processo">Como funciona</a>
@@ -1450,7 +1470,12 @@ if (currentHash === "#historico-completo") {
               </p>
 
               <div className="hero-actions">
-              <a href="#disponiveis" className="btn btn-dark pulse-button">
+              <a
+  href={instagramStoriesUrl}
+  className="btn btn-dark pulse-button"
+  target="_blank"
+  rel="noopener noreferrer"
+>
   Ver filhotes disponíveis
 </a>
                 <Button variant="outline" href={whatsappLink}>
