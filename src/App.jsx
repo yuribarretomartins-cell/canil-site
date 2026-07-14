@@ -15,29 +15,29 @@ import {
 import historyGallery from "./historyGallery";
 
 const breeds = [
-  { name: "Shih-tzu", desc: "Companheiro, dócil e ideal para famílias.", tag: "Mais procurado", image: "/imagens/Shihtzu.jpg" },
-  { name: "Lulu da Pomerânia", desc: "Pequeno, elegante e cheio de personalidade.", tag: "Premium", image: "/imagens/lulu.jpg" },
-  { name: "Yorkshire Terrier", desc: "Carinhoso, ativo e excelente para ambientes internos.", tag: "Sofisticado", image: "/imagens/york.jpg" },
-  { name: "Rottweiler", desc: "Forte, leal e indicado para tutores experientes.", tag: "Grande porte", image: "/imagens/rott.jpg" },
-  { name: "Pug", desc: "Afetuoso, divertido e muito apegado à família.", tag: "Família", image: "/imagens/pug.jpg" },
-  { name: "Pastor Alemão", desc: "Inteligente, protetor e de fácil treinamento.", tag: "Guarda" , image: "/imagens/pas.jpg" },
-  { name: "Pinscher", desc: "Pequeno, alerta e muito ligado ao tutor.", tag: "Compacto", image: "/imagens/pinscher.jpg" },
-  { name: "Spitz Alemão", desc: "Elegante, expressivo e com pelagem marcante.", tag: "Pelagem premium" , image: "/imagens/spitz.jpg" },
-  { name: "Bulldog Francês", desc: "Calmo, sociável e excelente para apartamentos.", tag: "Apartamento" , image: "/imagens/bul.jpg" },
-  { name: "Golden Retriever", desc: "Amável, inteligente e muito indicado para famílias.", tag: "Família" , image: "/imagens/gol.jpg" },
-  { name: "Labrador Retriever", desc: "Brincalhão, leal e de ótima convivência com crianças.", tag: "Companheiro" , image: "/imagens/lab.jpg" },
-  { name: "Poodle", desc: "Inteligente, versátil e disponível em diferentes portes.", tag: "Versátil" , image: "/imagens/poo.jpg" },
-  { name: "Maltês", desc: "Delicado, carinhoso e ideal para companhia.", tag: "Pequeno porte" , image: "/imagens/mal.jpg" },
-  { name: "Chihuahua", desc: "Pequeno no tamanho, grande na personalidade.", tag: "Mini" , image: "/imagens/chi.jpg" },
-  { name: "Dachshund", desc: "Curioso, fiel e conhecido pelo corpo alongado.", tag: "Salsichinha" , image: "/imagens/sals.jpg" },
-  { name: "Border Collie", desc: "Muito inteligente, ativo e indicado para tutores dinâmicos.", tag: "Alta energia" , image: "/imagens/bor.jpg" },
-  { name: "Beagle", desc: "Alegre, sociável e cheio de energia.", tag: "Ativo" , image: "/imagens/beal.jpg" },
-  { name: "Husky Siberiano", desc: "Imponente, resistente e de aparência marcante.", tag: "Exótico" , image: "/imagens/hus.jpg" },
-  { name: "Chow Chow", desc: "Reservado, elegante e com pelagem volumosa.", tag: "Imponente" , image: "/imagens/cho.jpg" },
-  { name: "Akita", desc: "Leal, protetor e de presença marcante.", tag: "Nobre" , image: "/imagens/aki.jpg" },
-  { name: "Gato Persa", desc: "Tranquilo, elegante e de pelagem longa.", tag: "Felino premium" , image: "/imagens/per.jpg" },
-  { name: "Maine Coon", desc: "Grande, dócil e conhecido como gigante gentil.", tag: "Felino grande" , image: "/imagens/mai.jpg" },
-  { name: "Gato Angorá", desc: "Elegante, sociável e de pelagem delicada.", tag: "Felino elegante" , image: "/imagens/ang.jpg" },
+  { name: "Shih-tzu", desc: "Companheiro, dócil e ideal para famílias.", price: "A partir de R$ 1.200,00", tag: "Mais procurado", image: "/imagens/Shihtzu.jpg" },
+  { name: "Lulu da Pomerânia", desc: "Pequeno, elegante e cheio de personalidade.", price: "A partir de R$ 3.000,00", tag: "Premium", image: "/imagens/lulu.jpg" },
+  { name: "Yorkshire Terrier", desc: "Carinhoso, ativo e excelente para ambientes internos.", price: "A partir de R$ 3.500,00", tag: "Sofisticado", image: "/imagens/york.jpg" },
+  { name: "Rottweiler", desc: "Forte, leal e indicado para tutores experientes.", price: "A partir de R$ 1.400,00", tag: "Grande porte", image: "/imagens/rott.jpg" },
+  { name: "Pug", desc: "Afetuoso, divertido e muito apegado à família.", price: "A partir de R$ 2.200,00", tag: "Família", image: "/imagens/pug.jpg" },
+  { name: "Pastor Alemão", desc: "Inteligente, protetor e de fácil treinamento.", price: "A partir de R$ 900,00", tag: "Guarda", image: "/imagens/pas.jpg" },
+  { name: "Pinscher", desc: "Pequeno, alerta e muito ligado ao tutor.", price: "A partir de R$ 750,00", tag: "Compacto", image: "/imagens/pinscher.jpg" },
+  { name: "Spitz Alemão", desc: "Elegante, expressivo e com pelagem marcante.", price: "A partir de R$ 3.500,00", tag: "Pelagem premium", image: "/imagens/spitz.jpg" },
+  { name: "Bulldog Francês", desc: "Calmo, sociável e excelente para apartamentos.", price: "A partir de R$ 3.500,00", tag: "Apartamento", image: "/imagens/bul.jpg" },
+  { name: "Golden Retriever", desc: "Amável, inteligente e muito indicado para famílias.", price: "A partir de R$ 3.200,00", tag: "Família", image: "/imagens/gol.jpg" },
+  { name: "Labrador Retriever", desc: "Brincalhão, leal e de ótima convivência com crianças.", price: "A partir de R$ 1.500,00", tag: "Companheiro", image: "/imagens/lab.jpg" },
+  { name: "Poodle", desc: "Inteligente, versátil e disponível em diferentes portes.", price: "A partir de R$ 1.200,00", tag: "Versátil", image: "/imagens/poo.jpg" },
+  { name: "Maltês", desc: "Delicado, carinhoso e ideal para companhia.", price: "A partir de R$ 3.500,00", tag: "Pequeno porte", image: "/imagens/mal.jpg" },
+  { name: "Chihuahua", desc: "Pequeno no tamanho, grande na personalidade.", price: "A partir de R$ 4.500,00", tag: "Mini", image: "/imagens/chi.jpg" },
+  { name: "Dachshund", desc: "Curioso, fiel e conhecido pelo corpo alongado.", price: "A partir de R$ 1.500,00", tag: "Salsichinha", image: "/imagens/sals.jpg" },
+  { name: "Border Collie", desc: "Muito inteligente, ativo e indicado para tutores dinâmicos.", price: "A partir de R$ 2.500,00", tag: "Alta energia", image: "/imagens/bor.jpg" },
+  { name: "Beagle", desc: "Alegre, sociável e cheio de energia.", price: "A partir de R$ 3.200,00", tag: "Ativo", image: "/imagens/beal.jpg" },
+  { name: "Husky Siberiano", desc: "Imponente, resistente e de aparência marcante.", price: "A partir de R$ 1.200,00", tag: "Exótico", image: "/imagens/hus.jpg" },
+  { name: "Chow Chow", desc: "Reservado, elegante e com pelagem volumosa.", price: "A partir de R$ 1.500,00", tag: "Imponente", image: "/imagens/cho.jpg" },
+  { name: "Akita", desc: "Leal, protetor e de presença marcante.", price: "A partir de R$ 3.500,00", tag: "Nobre", image: "/imagens/aki.jpg" },
+  { name: "Gato Persa", desc: "Tranquilo, elegante e de pelagem longa.", price: "A partir de R$ 2.500,00", tag: "Felino premium", image: "/imagens/per.jpg" },
+  { name: "Maine Coon", desc: "Grande, dócil e conhecido como gigante gentil.", price: "A partir de R$ 4.500,00", tag: "Felino grande", image: "/imagens/mai.jpg" },
+  { name: "Gato Angorá", desc: "Elegante, sociável e de pelagem delicada.", price: "A partir de R$ 2.000,00", tag: "Felino elegante", image: "/imagens/ang.jpg" },
 ];
 const availableGallery = [
   {
@@ -955,6 +955,18 @@ if (currentHash === "#historico-completo") {
           line-height: 1.6;
         }
 
+        .breed-price {
+          display: inline-flex;
+          align-items: center;
+          margin: 0 0 20px;
+          padding: 8px 13px;
+          border-radius: 999px;
+          background: #fef3c7;
+          color: #78350f;
+          font-size: 14px;
+          font-weight: 800;
+        }
+
         .process-grid {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
@@ -1596,6 +1608,7 @@ if (currentHash === "#historico-completo") {
                     <span className="tag">{breed.tag}</span>
                     <h3>{breed.name}</h3>
                     <p>{breed.desc}</p>
+                    <div className="breed-price">{breed.price}</div>
                     <Button variant="outline" href={whatsappLink}>
                       Consultar disponibilidade
                     </Button>
