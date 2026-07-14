@@ -121,6 +121,76 @@ function GallerySection({ id, eyebrow, title, subtitle, items, dark = false, var
     </section>
   );
 }
+function InstagramCallout() {
+  return (
+    <section className="section white">
+      <div className="container">
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "minmax(0, 1fr) minmax(280px, 420px)",
+            gap: "32px",
+            alignItems: "center",
+            padding: "28px",
+            borderRadius: "28px",
+            background:
+              "linear-gradient(135deg, rgba(255,255,255,0.95), rgba(250,241,229,0.95))",
+            boxShadow: "0 24px 70px rgba(71, 45, 28, 0.12)",
+            border: "1px solid rgba(184, 137, 79, 0.18)",
+          }}
+        >
+          <div>
+            <p className="eyebrow">Instagram oficial</p>
+
+            <h2 className="section-title">
+              Acompanhe nossos filhotes, entregas e novidades no Instagram
+            </h2>
+
+            <p className="section-subtitle" style={{ marginBottom: "22px" }}>
+              Siga o Canil Multi Raças Imperatriz para ver stories, fotos,
+              vídeos de filhotes, entregas realizadas e atualizações do dia.
+            </p>
+
+            <a
+              className="btn btn-dark"
+              href={instagramUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Seguir no Instagram
+            </a>
+          </div>
+
+          <a
+            href={instagramUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: "block",
+              borderRadius: "24px",
+              overflow: "hidden",
+              border: "1px solid rgba(184, 137, 79, 0.25)",
+              boxShadow: "0 18px 50px rgba(0,0,0,0.16)",
+              background: "#111",
+            }}
+          >
+            <img
+              src="/imagens/instagram-canil.png"
+              alt="Instagram do Canil Multi Raças Imperatriz"
+              style={{
+                width: "100%",
+                display: "block",
+                objectFit: "cover",
+              }}
+            />
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+
 function HistoryTeaser({ items }) {
   const previewItems = items.slice(0, 6);
 
@@ -1535,74 +1605,7 @@ if (currentHash === "#historico-completo") {
             </div>
           </div>
         </section>
-    function InstagramCallout() {
-  return (
-    <section className="section white">
-      <div className="container">
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "minmax(0, 1fr) minmax(280px, 420px)",
-            gap: "32px",
-            alignItems: "center",
-            padding: "28px",
-            borderRadius: "28px",
-            background:
-              "linear-gradient(135deg, rgba(255,255,255,0.95), rgba(250,241,229,0.95))",
-            boxShadow: "0 24px 70px rgba(71, 45, 28, 0.12)",
-            border: "1px solid rgba(184, 137, 79, 0.18)",
-          }}
-        >
-          <div>
-            <p className="eyebrow">Instagram oficial</p>
 
-            <h2 className="section-title">
-              Acompanhe nossos filhotes, entregas e novidades no Instagram
-            </h2>
-
-            <p className="section-subtitle" style={{ marginBottom: "22px" }}>
-              Siga o Canil Multi Raças Imperatriz para ver stories, fotos,
-              vídeos de filhotes, entregas realizadas e atualizações do dia.
-            </p>
-
-            <a
-              className="btn btn-dark"
-              href={instagramUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Seguir no Instagram
-            </a>
-          </div>
-
-          <a
-            href={instagramUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              display: "block",
-              borderRadius: "24px",
-              overflow: "hidden",
-              border: "1px solid rgba(184, 137, 79, 0.25)",
-              boxShadow: "0 18px 50px rgba(0,0,0,0.16)",
-              background: "#111",
-            }}
-          >
-            <img
-              src="/imagens/instagram-canil.png"
-              alt="Instagram do Canil Multi Raças Imperatriz"
-              style={{
-                width: "100%",
-                display: "block",
-                objectFit: "cover",
-              }}
-            />
-          </a>
-        </div>
-      </div>
-    </section>
-  );
-}
 <HistoryTeaser items={historyGallery} />
 
         <section id="processo" className="section dark">
