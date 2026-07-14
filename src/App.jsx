@@ -39,26 +39,7 @@ const breeds = [
   { name: "Maine Coon", desc: "Grande, dócil e conhecido como gigante gentil.", price: "A partir de R$ 4.500,00", tag: "Felino grande", image: "/imagens/mai.jpg" },
   { name: "Gato Angorá", desc: "Elegante, sociável e de pelagem delicada.", price: "A partir de R$ 2.000,00", tag: "Felino elegante", image: "/imagens/ang.jpg" },
 ];
-const availableGallery = [
-  {
-    title: "Salsichinha Macho",
-    desc: "Disponível para consulta",
-    type: "video",
-    src: "/galeria/disponiveis/salsicha.mp4",
-  },
-  {
-    title: "Pinscher Zero Macho",
-    desc: "Vídeo atualizado do filhote",
-    type: "video",
-    src: "/galeria/disponiveis/pinscher.mp4",
-  },
-  {
-    title: "Golden Retriever Macho",
-    desc: "Consulte disponibilidade pelo WhatsApp",
-    type: "image",
-    src: "/galeria/disponiveis/GOLDEN (1).jpg",  
-  },
-];
+
 
 const whatsappNumber = "5599984319021"; 
 const instagramUrl = "https://www.instagram.com/canilmultimperatriz/";
