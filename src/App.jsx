@@ -39,27 +39,6 @@ const breeds = [
   { name: "Maine Coon", desc: "Grande, dócil e conhecido como gigante gentil.", price: "A partir de R$ 4.500,00", tag: "Felino grande", image: "/imagens/mai.jpg" },
   { name: "Gato Angorá", desc: "Elegante, sociável e de pelagem delicada.", price: "A partir de R$ 2.000,00", tag: "Felino elegante", image: "/imagens/ang.jpg" },
 ];
-const availableGallery = [
-  {
-    title: "Salsichinha Macho",
-    desc: "Disponível para consulta",
-    type: "video",
-    src: "/galeria/disponiveis/salsicha.mp4",
-  },
-  {
-    title: "Pinscher Zero Macho",
-    desc: "Vídeo atualizado do filhote",
-    type: "video",
-    src: "/galeria/disponiveis/pinscher.mp4",
-  },
-  {
-    title: "Golden Retriever Macho",
-    desc: "Consulte disponibilidade pelo WhatsApp",
-    type: "image",
-    src: "/galeria/disponiveis/GOLDEN (1).jpg",  
-  },
-];
-
 const whatsappNumber = "5599984319021"; 
 const instagramUrl = "https://www.instagram.com/canilmultimperatriz/";
 const instagramStoriesUrl = "https://www.instagram.com/stories/canilmultimperatriz/";
@@ -81,46 +60,6 @@ function Button({ children, variant = "dark", href }) {
   }
 
   return <button className={className}>{children}</button>;
-}
-function GallerySection({ id, eyebrow, title, subtitle, items, dark = false, variant = "default" }) {
-  return (
-    <section id={id} className={dark ? "section dark" : "section white"}>
-      <div className="container">
-        <div className="section-header">
-          <div>
-            <p className="eyebrow">{eyebrow}</p>
-            <h2 className="section-title">{title}</h2>
-          </div>
-          <p>{subtitle}</p>
-        </div>
-
-        <div className={variant === "stories" ? "gallery-grid stories-grid" : "gallery-grid"}>
-          {items.map((item) => (
-          <div className={variant === "stories" ? "gallery-card stories-card" : "gallery-card"} key={item.src}>
-              <div className={variant === "stories" ? "gallery-media stories-media" : "gallery-media"}>
-                {item.type === "video" ? (
-                  <video
-                    src={item.src}
-                    controls
-                    muted
-                    playsInline
-                    preload="metadata"
-                  />
-                ) : (
-                  <img src={item.src} alt={item.title} />
-                )}
-              </div>
-
-              <div className="gallery-content">
-                <h3>{item.title}</h3>
-                <p>{item.desc}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
 }
 function InstagramCallout() {
   return (
@@ -1532,15 +1471,6 @@ if (currentHash === "#historico-completo") {
             </motion.div>
           </div>
         </section>
-
-<GallerySection
-  id="disponiveis"
-  eyebrow="Disponíveis do dia"
-  title="Filhotes disponíveis agora"
-  subtitle="Confira fotos e vídeos atualizados dos filhotes disponíveis para consulta. A disponibilidade pode mudar ao longo do dia."
-  items={availableGallery}
-  variant="stories"
-/>
 
 <InstagramCallout />
 
