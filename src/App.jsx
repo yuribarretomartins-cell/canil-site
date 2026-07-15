@@ -1432,7 +1432,7 @@ if (currentHash === "#historico-completo") {
 
         <nav className="nav">
   <a href="#filhotes">Filhotes</a>
-  <a href={instagramStoriesUrl} target="_blank" rel="noopener noreferrer">Disponíveis</a>
+  <a href={instagramStoriesUrl} target="_blank" rel="noreferrer">Disponíveis</a>
   <a href="#historico">Histórico</a>
   <a href="#sobre">Sobre</a>
   <a href="#processo">Como funciona</a>
@@ -1470,12 +1470,7 @@ if (currentHash === "#historico-completo") {
               </p>
 
               <div className="hero-actions">
-              <a
-  href={instagramStoriesUrl}
-  className="btn btn-dark pulse-button"
-  target="_blank"
-  rel="noopener noreferrer"
->
+              <a href={instagramStoriesUrl} className="btn btn-dark pulse-button" target="_blank" rel="noreferrer">
   Ver filhotes disponíveis
 </a>
                 <Button variant="outline" href={whatsappLink}>
