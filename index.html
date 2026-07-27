@@ -53,5 +53,97 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+   
+<script>
+  (function () {
+    function encontrarTituloDisponiveis() {
+      const todos = Array.from(document.querySelectorAll("h1, h2, h3, h4, p, span, div"));
+      return todos.find(function (el) {
+        const texto = (el.innerText || "").trim().toLowerCase();
+        return texto === "disponíveis agora" || texto === "disponiveis agora";
+      });
+    }
+
+    function encontrarBlocoPrincipal(elemento) {
+      let atual = elemento;
+
+      for (let i = 0; i < 8; i++) {
+        if (!atual || !atual.parentElement) break;
+
+        const texto = (atual.innerText || "").toLowerCase();
+        const imagens = atual.querySelectorAll("img").length;
+        const botoes = atual.querySelectorAll("a, button").length;
+
+        if (
+          texto.includes("disponíveis agora") &&
+          (imagens >= 1 || botoes >= 1 || texto.includes("filhote"))
+        ) {
+          return atual;
+        }
+
+        atual = atual.parentElement;
+      }
+
+      return elemento.parentElement;
+    }
+
+    function substituirDisponiveisAntigos() {
+      if (document.getElementById("disponiveis-home-atualizados")) return;
+
+      const titulo = encontrarTituloDisponiveis();
+      if (!titulo) return false;
+
+      const bloco = encontrarBlocoPrincipal(titulo);
+      if (!bloco) return false;
+
+      bloco.innerHTML = `
+        <section id="disponiveis-home-atualizados" style="padding: 56px 16px; background: #fff;">
+          <div style="max-width: 1180px; margin: 0 auto;">
+            <div style="text-align: center; margin-bottom: 28px;">
+              <p style="font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase; color: #b8894f; font-weight: 700; margin-bottom: 8px;">
+                Disponíveis agora
+              </p>
+              <h2 style="font-size: clamp(28px, 4vw, 42px); line-height: 1.1; margin: 0 0 12px; color: #2b1b12;">
+                Filhotes disponíveis no Canil Multi Raças Imperatriz
+              </h2>
+              <p style="font-size: 16px; color: #6b5b50; max-width: 720px; margin: 0 auto;">
+                Veja os filhotes cadastrados e atualizados pelo nosso painel.
+              </p>
+            </div>
+
+            <iframe
+              src="/disponiveis"
+              title="Filhotes disponíveis"
+              style="width: 100%; min-height: 1000px; border: 0; border-radius: 20px; overflow: hidden;"
+              loading="lazy"
+            ></iframe>
+          </div>
+        </section>
+      `;
+
+      return true;
+    }
+
+    function iniciar() {
+      let tentativas = 0;
+
+      const intervalo = setInterval(function () {
+        tentativas++;
+
+        const sucesso = substituirDisponiveisAntigos();
+
+        if (sucesso || tentativas >= 30) {
+          clearInterval(intervalo);
+        }
+      }, 500);
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", iniciar);
+    } else {
+      iniciar();
+    }
+  })();
+</script>
   </body>
 </html>
