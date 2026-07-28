@@ -39,6 +39,34 @@ const breeds = [
   { name: "Maine Coon", desc: "Grande, dócil e conhecido como gigante gentil.", price: "A partir de R$ 4.500,00", tag: "Felino grande", image: "/imagens/mai.jpg" },
   { name: "Gato Angorá", desc: "Elegante, sociável e de pelagem delicada.", price: "A partir de R$ 2.000,00", tag: "Felino elegante", image: "/imagens/ang.jpg" },
 ];
+
+const breedGuideImages = [
+  {
+    title: "Cartilha 1 — Raças de Pequeno Porte",
+    subtitle: "Shih Tzu, Pinscher, Bulldog Francês, Salsichinha e Pug",
+    image: "/imagens/ChatGPT Image 28 de jul. de 2026, 16_23_58 (1).png",
+  },
+  {
+    title: "Cartilha 2 — Raças de Pequeno Porte",
+    subtitle: "Bulldog Inglês, Yorkshire, Maltês, Chihuahua e Fox Paulistinha",
+    image: "/imagens/ChatGPT Image 28 de jul. de 2026, 16_23_59 (2).png",
+  },
+  {
+    title: "Cartilha 3 — Raças de Grande Porte",
+    subtitle: "Pastor Alemão, Husky Siberiano, Labrador, Golden e Fila Brasileiro",
+    image: "/imagens/ChatGPT Image 28 de jul. de 2026, 16_23_59 (3).png",
+  },
+  {
+    title: "Cartilha 4 — Raças de Grande Porte",
+    subtitle: "Pitbull, Pit Monster, American Bully, Rottweiler e Boxer",
+    image: "/imagens/ChatGPT Image 28 de jul. de 2026, 16_24_00 (4).png",
+  },
+  {
+    title: "Cartilha 5 — Raças de Grande Porte",
+    subtitle: "Cane Corso, Doberman, Chow Chow e Pastor Belga Malinois",
+    image: "/imagens/ChatGPT Image 28 de jul. de 2026, 16_24_00 (5).png",
+  },
+];
 const whatsappNumber = "5599984319021"; 
 const instagramUrl = "https://www.instagram.com/canilmultimperatriz/";
 const instagramStoriesUrl = "https://www.instagram.com/stories/canilmultimperatriz/";
@@ -125,6 +153,57 @@ function InstagramCallout() {
             />
           </a>
         </div>
+      </div>
+    </section>
+  );
+}
+
+
+function BreedGuideSection() {
+  return (
+    <section id="guia-racas" className="section guide-section">
+      <div className="container">
+        <div className="section-header">
+          <div>
+            <p className="eyebrow">Guia de raças</p>
+            <h2 className="section-title">Cartilhas para ajudar na escolha do filhote</h2>
+          </div>
+          <p>
+            Conheça perfis de raças de pequeno e grande porte, com características
+            de companhia, sociabilidade, guarda e comportamento familiar.
+          </p>
+        </div>
+
+        <div className="guide-grid">
+          {breedGuideImages.map((guide) => (
+            <article className="guide-card" key={guide.image}>
+              <a href={guide.image} target="_blank" rel="noreferrer">
+                <img src={guide.image} alt={guide.title} loading="lazy" />
+              </a>
+
+              <div className="guide-content">
+                <div>
+                  <h3>{guide.title}</h3>
+                  <p>{guide.subtitle}</p>
+                </div>
+
+                <a
+                  className="btn btn-outline guide-button"
+                  href={guide.image}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Abrir cartilha
+                </a>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <p className="guide-note">
+          As cartilhas são materiais informativos. A escolha ideal depende da rotina,
+          espaço disponível, perfil da família e orientação individual no atendimento.
+        </p>
       </div>
     </section>
   );
@@ -524,7 +603,7 @@ if (currentHash === "#historico-completo") {
         .nav {
           display: flex;
           align-items: center;
-          gap: 30px;
+          gap: 22px;
           font-size: 14px;
           font-weight: 600;
           color: #57534e;
@@ -907,6 +986,71 @@ if (currentHash === "#historico-completo") {
           font-weight: 800;
         }
 
+        .guide-section {
+          background: #fbf7ef;
+        }
+
+        .guide-grid {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 24px;
+        }
+
+        .guide-card {
+          overflow: hidden;
+          border-radius: 32px;
+          background: #fff;
+          border: 1px solid #e7e5e4;
+          box-shadow: 0 14px 36px rgba(28, 25, 23, 0.1);
+          transition: 0.22s ease;
+        }
+
+        .guide-card:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 24px 58px rgba(28, 25, 23, 0.16);
+        }
+
+        .guide-card img {
+          width: 100%;
+          display: block;
+          object-fit: cover;
+          background: #f5f5f4;
+        }
+
+        .guide-content {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 18px;
+          padding: 22px;
+        }
+
+        .guide-content h3 {
+          margin: 0 0 8px;
+          color: #1c1917;
+          font-size: 22px;
+          letter-spacing: -0.04em;
+        }
+
+        .guide-content p {
+          margin: 0;
+          color: #57534e;
+          line-height: 1.6;
+        }
+
+        .guide-button {
+          flex: 0 0 auto;
+          background: #fbf7ef;
+        }
+
+        .guide-note {
+          max-width: 860px;
+          margin: 26px auto 0;
+          color: #57534e;
+          text-align: center;
+          line-height: 1.7;
+        }
+
         .process-grid {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
@@ -1172,6 +1316,10 @@ if (currentHash === "#historico-completo") {
           .breed-grid {
             grid-template-columns: repeat(2, 1fr);
           }
+
+          .guide-grid {
+            grid-template-columns: 1fr;
+          }
 .gallery-grid {
   grid-template-columns: repeat(2, 1fr);
 }
@@ -1338,6 +1486,15 @@ if (currentHash === "#historico-completo") {
             flex-direction: column;
           }
 
+          .guide-content {
+            align-items: flex-start;
+            flex-direction: column;
+          }
+
+          .guide-button {
+            width: 100%;
+          }
+
        .breed-grid,
 .gallery-grid,
 .process-grid,
@@ -1372,6 +1529,7 @@ if (currentHash === "#historico-completo") {
         <nav className="nav">
   <a href="#filhotes">Filhotes</a>
   <a href={instagramStoriesUrl} target="_blank" rel="noreferrer">Disponíveis</a>
+  <a href="#guia-racas">Guia de Raças</a>
   <a href="#historico">Histórico</a>
   <a href="#sobre">Sobre</a>
   <a href="#processo">Como funciona</a>
@@ -1549,6 +1707,8 @@ if (currentHash === "#historico-completo") {
             </div>
           </div>
         </section>
+
+<BreedGuideSection />
 
 <HistoryTeaser items={historyGallery} />
 
